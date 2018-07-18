@@ -3,6 +3,6 @@
 
 int main(int, char**)
 {
-	Testin::run();
-	return 0;
+  Testin::run();
+  return 0;
 }

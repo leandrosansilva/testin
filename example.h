@@ -2,5 +2,5 @@
 
 struct Example
 {
-	int add(int, int) const;
+  int add(int, int) const;
 };

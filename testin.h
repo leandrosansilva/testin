@@ -15,47 +15,47 @@
 #define TESTIN_CASE(NAME, CODE) static auto TESTIN_TOKENPASTE2(___testin_case___, __LINE__) = Testin::makeCase(NAME, CODE)
 
 namespace Testin {
-	struct Tester;
+  struct Tester;
 
-	Tester& instance();
+  Tester& instance();
 
-	using callback_type = void();
+  using callback_type = void();
 
-	struct Tester
-	{
-		std::vector<std::pair<const char*, std::function<callback_type>>> _testCases;
+  struct Tester
+  {
+    std::vector<std::pair<const char*, std::function<callback_type>>> _testCases;
 
-		inline void addTestCase(const char* name, callback_type function)
-		{
-			_testCases.emplace_back(name, function);
-		}
+    inline void addTestCase(const char* name, callback_type function)
+    {
+      _testCases.emplace_back(name, function);
+    }
 
-		inline void run()
-		{
-			for (auto& testCase: _testCases) {
-				std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
-				testCase.second();
-			}
-		}
-	};
+    inline void run()
+    {
+      for (auto& testCase: _testCases) {
+        std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
+        testCase.second();
+      }
+    }
+  };
 
-	struct Case
-	{
-		inline explicit Case(const char* name, callback_type function)
-		{
-			instance().addTestCase(name, function);
-		}
-	};
+  struct Case
+  {
+    inline explicit Case(const char* name, callback_type function)
+    {
+      instance().addTestCase(name, function);
+    }
+  };
 
-	inline Case makeCase(const char* name, callback_type function)
-	{
-		return Case(name, function);
-	}
+  inline Case makeCase(const char* name, callback_type function)
+  {
+    return Case(name, function);
+  }
 
-	inline void run()
-	{
-		instance().run();
-	}
+  inline void run()
+  {
+    instance().run();
+  }
 }
 
 #else
@@ -63,9 +63,9 @@ namespace Testin {
 #define TESTIN_CASE(NAME, CODE)
 
 namespace Testin {
-	inline void run()
-	{
-	}
+  inline void run()
+  {
+  }
 }
 
 #endif

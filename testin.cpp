@@ -7,14 +7,14 @@
 
 Testin::Tester& Testin::instance()
 {
-	static std::once_flag flag;
-	static Tester* instance = nullptr;
+  static std::once_flag flag;
+  static Tester* instance = nullptr;
 
-	std::call_once(flag, []{
-		instance = new Testin::Tester;
-	});
+  std::call_once(flag, []{
+    instance = new Testin::Tester;
+  });
 
-	return *instance;
+  return *instance;
 }
 
 #endif

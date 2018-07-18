@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.0)
 set (CMAKE_CXX_STANDARD 11)
 
 if ("${TESTIN_ENABLED}" EQUAL "1")
-	add_definitions(-DTESTIN_ENABLED=1)
+  add_definitions(-DTESTIN_ENABLED=1)
 endif()
 
 add_library(testin SHARED testin.cpp testin.h)
