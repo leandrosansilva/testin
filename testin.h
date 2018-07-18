@@ -24,38 +24,19 @@ namespace Testin {
   struct Tester
   {
     std::vector<std::pair<const char*, std::function<callback_type>>> _testCases;
+    void addTestCase(const char*, Testin::callback_type);
 
-    inline void addTestCase(const char* name, callback_type function)
-    {
-      _testCases.emplace_back(name, function);
-    }
-
-    inline void run()
-    {
-      for (auto& testCase: _testCases) {
-        std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
-        testCase.second();
-      }
-    }
+    void run();
   };
 
   struct Case
   {
-    inline explicit Case(const char* name, callback_type function)
-    {
-      instance().addTestCase(name, function);
-    }
+    explicit Case(const char*, callback_type);
   };
 
-  inline Case makeCase(const char* name, callback_type function)
-  {
-    return Case(name, function);
-  }
+  Case makeCase(const char*, callback_type);
 
-  inline void run()
-  {
-    instance().run();
-  }
+  void run();
 }
 
 #else

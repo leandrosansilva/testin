@@ -9,6 +9,7 @@ if ("${TESTIN_ENABLED}" EQUAL "1")
 endif()
 
 add_library(testin SHARED testin.cpp testin.h)
+target_link_libraries(testin pthread)
 
 add_executable(example main.cpp example.cpp test2.cpp)
 
