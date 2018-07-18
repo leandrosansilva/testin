@@ -5,6 +5,10 @@
 #include <mutex>
 #include <iostream>
 
+namespace {
+  std::mutex mutex;
+}
+
 namespace Testin {
 
 Tester& instance()
@@ -21,14 +25,18 @@ Tester& instance()
 
 void Tester::run()
 {
-	for (auto& testCase: _testCases) {
-		std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
-		testCase.second();
-	}
+  // FIXME: I know, this is stupid
+  std::lock_guard<std::mutex> lock{mutex};
+
+  for (auto& testCase: _testCases) {
+    std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
+    testCase.second();
+  }
 }
 
 void Tester::addTestCase(const char* name, callback_type function)
 {
+  std::lock_guard<std::mutex> lock{mutex};
   _testCases.emplace_back(name, function);
 }
 
@@ -46,7 +54,6 @@ void run()
 {
   instance().run();
 }
-
 
 }
 
