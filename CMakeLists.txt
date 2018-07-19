@@ -13,6 +13,8 @@ endif()
 add_library(testin SHARED testin.cpp testin.h)
 target_link_libraries(testin pthread)
 
-add_executable(example main.cpp example.cpp test2.cpp)
+add_library(my_library STATIC example.cpp example.h test2.cpp)
 
-target_link_libraries(example testin)
+add_executable(example main.cpp)
+
+target_link_libraries(example testin my_library)

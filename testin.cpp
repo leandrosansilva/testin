@@ -5,10 +5,6 @@
 #include <mutex>
 #include <iostream>
 
-namespace {
-  std::mutex mutex;
-}
-
 namespace Testin {
 
 Tester& instance()
@@ -25,34 +21,42 @@ Tester& instance()
 
 void Tester::run()
 {
-  // FIXME: I know, this is stupid
-  std::lock_guard<std::mutex> lock{mutex};
+  for (const auto& suite: _suites) {
+    suite->run();
+  }
+}
 
+void TestSuite::run()
+{
   for (auto& testCase: _testCases) {
     std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
     testCase.second();
   }
 }
 
-void Tester::addTestCase(const char* name, callback_type function)
+void TestSuite::addTestCase(const char* name, callback_type function)
 {
-  std::lock_guard<std::mutex> lock{mutex};
   _testCases.emplace_back(name, function);
 }
 
-Case::Case(const char* name, callback_type function)
+Case::Case(TestSuite& suite, const char* name, callback_type function)
 {
-  instance().addTestCase(name, function);
+  suite.addTestCase(name, function);
 }
 
-Case makeCase(const char* name, callback_type function)
+Case makeCase(TestSuite& suite, const char* name, callback_type function)
 {
-  return Case(name, function);
+  return Case(suite, name, function);
 }
 
 void run()
 {
   instance().run();
+}
+
+void registerSuite(TestSuite& suite)
+{
+  instance()._suites.push_back(&suite);
 }
 
 }
