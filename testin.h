@@ -15,6 +15,8 @@
 
 #define TESTIN_MAKE_TESTABLE(A) extern void testin_make_testable_##A(); testin_make_testable_##A()
 
+#define TESTIN_RUN() Testin::run()
+
 #define TESTIN_SUITE(A) \
   using namespace snowhouse; \
   static Testin::TestSuite __testin_test_suit; \
@@ -69,11 +71,7 @@ namespace Testin {
 
 #define TESTIN_SUITE(A)
 
-namespace Testin {
-  inline void run()
-  {
-  }
-}
+#define TESTIN_RUN()
 
 #endif
 
