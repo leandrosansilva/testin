@@ -1,0 +1,4 @@
+[submodule "3rd/snowhouse"]
+	path = 3rd/snowhouse
+	url = https://github.com/banditcpp/snowhouse
+	branch = headers-only

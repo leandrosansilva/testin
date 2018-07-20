@@ -29,9 +29,17 @@ void Tester::run()
 
 void TestSuite::run()
 {
+  using namespace snowhouse;
+
   for (auto& testCase: _testCases) {
     std::cout << "Running Test Case: \"" << testCase.first << "\"\n";
-    testCase.second();
+    try {
+      testCase.second();
+    } catch (AssertionException& ex) {
+      std::cerr << "failed with message: \"" << ex.GetMessage() << "\".\n";
+    } catch (...) {
+      std::cerr << "failed with no message.\n";
+    }
   }
 }
 

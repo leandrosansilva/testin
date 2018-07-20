@@ -16,17 +16,17 @@ int Example::add(int f, int s) const
 }
 
 TESTIN_CASE("0 + 0 is 0", []{
-  assert(super_add_function(0, 0) == 0);
+  AssertThat(super_add_function(0, 0), Is().EqualTo(0));
 });
 
 TESTIN_CASE("0 + 1 is 1", []{
-  assert(super_add_function(0, 1) == 1);
+  AssertThat(super_add_function(0, 1), Is().EqualTo(1));
 });
 
 TESTIN_CASE("1 + 1 is 2", []{
-  assert(super_add_function(1, 1) == 2);
+  AssertThat(super_add_function(1, 1), Is().EqualTo(2));
 });
 
 TESTIN_CASE("2 + 1 is 3", []{
-  assert(super_add_function(2, 1) == 3);
+  AssertThat(super_add_function(2, 1), Is().EqualTo(3));
 });

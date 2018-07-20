@@ -2,13 +2,11 @@
 
 #ifdef TESTIN_ENABLED
 
-// TODO: use https://github.com/banditcpp/snowhouse
-#include <assert.h>
-
 #include <vector>
 #include <functional>
 #include <utility>
 #include <iostream>
+#include "3rd/snowhouse/snowhouse.h"
 
 #define TESTIN_TOKENPASTE(x, y) x ## y
 #define TESTIN_TOKENPASTE2(x, y) TESTIN_TOKENPASTE(x, y)
@@ -18,6 +16,7 @@
 #define TESTIN_MAKE_TESTABLE(A) extern void testin_make_testable_##A(); testin_make_testable_##A()
 
 #define TESTIN_SUITE(A) \
+  using namespace snowhouse; \
   static Testin::TestSuite __testin_test_suit; \
   void testin_make_testable_##A() \
   { \
