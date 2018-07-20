@@ -22,6 +22,7 @@ Tester& instance()
 void Tester::run()
 {
   for (const auto& suite: _suites) {
+    std::cout << "Test Suite: \"" << suite->_name << "\"\n";
     suite->run();
   }
 }

@@ -21,6 +21,7 @@
   static Testin::TestSuite __testin_test_suit; \
   void testin_make_testable_##A() \
   { \
+    __testin_test_suit._name = #A; \
     Testin::registerSuite(__testin_test_suit);\
   }
 
@@ -31,6 +32,8 @@ namespace Testin {
 
   struct TestSuite
   {
+    const char* _name{nullptr};
+
     std::vector<std::pair<const char*, std::function<callback_type>>> _testCases;
 
     void run();
